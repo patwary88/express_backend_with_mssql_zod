@@ -1,0 +1,6 @@
+2025-02-17 12:30:26 [ERROR]: User registration failed: Validation error
+2025-02-17 12:31:41 [ERROR]: User registration failed: Validation error
+2025-02-17 12:32:03 [ERROR]: Employee Entry failed: Validation error
+2025-02-17 12:36:09 [ERROR]: Employee Entry failed: Validation error
+2025-02-17 12:36:30 [ERROR]: Employee Entry failed: Validation error
+2025-02-17 12:39:39 [ERROR]: Employee Entry failed: Table 'attendance_payroll.hrm_employees' doesn't exist
