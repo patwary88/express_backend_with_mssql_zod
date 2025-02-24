@@ -65,10 +65,18 @@ export class employeeBasicController {
      // Update an employee
     funcUpdateEmployee = async (req: Request, res: Response): Promise<void> => {
     try {
-      const emp_code = parseInt(req.params.emp_code, 10);
 
+      const emp_code = parseInt(req.params.emp_code, 10);
+        if (isNaN(emp_code)) {
+          res.status(400).json({ message: 'Invalid employee code' });
+          return;
+      }
+
+      const currentUserId = (req as any).user.id;
       
       const updateData = req.body;
+      updateData.updated_by = currentUserId;
+      
       const employee = await this.employeeBasicService.updateEmployee(emp_code, updateData);
       if (employee) {
         res.json(employee);
@@ -83,8 +91,19 @@ export class employeeBasicController {
 
     funcdeleteEmployee = async (req: Request, res: Response): Promise<void> => {
       try {
-        const employees = await this.employeeBasicService.getAllEmployees();
-        res.json(employees);
+        const emp_code = parseInt(req.params.emp_code, 10);
+
+        if (isNaN(emp_code)) {
+          res.status(400).json({ message: 'Invalid employee code' });
+          return;
+      }
+
+        const deleted = await this.employeeBasicService.deleteEmployee(emp_code);
+        if (deleted) {
+          res.json({ message: 'Employee deleted successfully' });
+        } else {
+          res.status(404).json({ message: 'Employee not found' });
+        }
       } catch (error: any) {
         res.status(500).json({ message: error.message });
       }

@@ -42,8 +42,8 @@ export class EmployeeBasicRepository {
     }
 
     // Delete an employee record
-    async delete(id: number): Promise<boolean> {
-      const count = await EmployeeBasic.destroy({ where: { id } });
+    async delete(emp_code: number): Promise<boolean> {
+      const count = await EmployeeBasic.destroy({ where: { emp_code } });
       return count > 0;
     }
   

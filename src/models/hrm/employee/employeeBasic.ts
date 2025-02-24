@@ -60,5 +60,9 @@ EmployeeBasic.beforeUpdate((employee, options: any) => {
     employee.updated_by = options.userId;
   }
 });
-
+// EmployeeBasic.afterUpdate((employee, options: any) => {
+//   if (options.userId) {
+//     employee.updated_by = options.userId;
+//   }
+// });
   export default EmployeeBasic;

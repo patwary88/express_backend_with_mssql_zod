@@ -61,6 +61,14 @@ export class EmployeeBasicService {
     }
   }
 
-
+  // Delete an employee record
+  async deleteEmployee(emp_code: number): Promise<boolean> {
+    try {
+      return await this.empBasicRepository.delete(emp_code);
+    } catch (error: any) {
+      logger.error(`Error deleting employee with id ${emp_code}: ${error.message}`, { stack: error.stack });
+      throw error;
+    }
+  }
 
 }
