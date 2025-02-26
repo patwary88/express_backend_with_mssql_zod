@@ -3,6 +3,7 @@ import dotenv from 'dotenv';
 import cookieParser from 'cookie-parser';
 import userRoutes from './routes/user.routes';
 import employeeRoutes from './routes/employee.routes';
+import MssqlRoutes from './routes/mssql.route';
 import { errorHandler } from './middleware/errorHandler';
 import { securityMiddleware } from './middleware/security';
 
@@ -20,6 +21,8 @@ securityMiddleware(app);
 app.use('/api/users', userRoutes);
 // User routes
 app.use('/api/employee', employeeRoutes);
+
+app.use('/api/attendance', MssqlRoutes);
 
 // Global error handler (should be the last middleware)
 app.use(errorHandler);
