@@ -1,0 +1,42 @@
+npm init -y
+
+# Production dependencies
+npm install express dotenv jsonwebtoken bcryptjs helmet cors xss-clean express-rate-limit sequelize mysql2 oracledb cookie-parser express-validator mssql
+
+# Development dependencies
+npm install --save-dev typescript ts-node nodemon @types/express @types/node @types/jsonwebtoken @types/bcryptjs @types/helmet @types/cors @types/express-rate-limit @types/cookie-parser
+
+npm install winston winston-daily-rotate-file
+
+
+Using ts-node with nodemon (Development Mode) :
+
+Add a script to your package.json:
+
+
+{
+  "scripts": {
+    "dev": "nodemon --watch 'src/**/*.ts' --exec ts-node src/server.ts"
+  }
+}
+
+npm run dev
+
+Building the Project and Running with Node (Production Mode) :
+
+{
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/server.js"
+  }
+}
+
+npm run build
+
+npm start
+
+
+connection check with mssql db command 
+
+ts-node src/utils/testMSSQL.ts
+
