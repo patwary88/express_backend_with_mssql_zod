@@ -2,7 +2,7 @@
 import * as dotenv from 'dotenv';
 dotenv.config(); // Load environment variables
 
-import SourceEmployeeAttendance, { ISourceEmployeeAttendanceAttributes } from '../models/mssql/SourceEmployeeAttendance';
+import SourceEmployeeRawAttendanceData, { ISourceEmployeeRawAttendanceDataAttributes } from '../models/mssql/SourceEmployeeRawAttendanceData';
 // Import your ETL service (if you want to run full ETL)
 import { DataTransferService } from '../services/DataTransferService';
 import logger from '../utils/logs/logger'; // Ensure you have your logger set up
@@ -11,7 +11,7 @@ import logger from '../utils/logs/logger'; // Ensure you have your logger set up
 async function testMSSQLData() {
   try {
     // Fetch up to 1000 records from MSSQL, ordered descending by id
-    const sourceRecords: ISourceEmployeeAttendanceAttributes[] = await SourceEmployeeAttendance.findAll({
+    const sourceRecords: ISourceEmployeeRawAttendanceDataAttributes[] = await SourceEmployeeRawAttendanceData.findAll({
       order: [['IndexKey', 'DESC']],
       limit: 1000,
     });

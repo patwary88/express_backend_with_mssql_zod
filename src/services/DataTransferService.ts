@@ -1,4 +1,4 @@
-import SourceEmployeeAttendance, { ISourceEmployeeAttendanceAttributes } from '../models/mssql/SourceEmployeeAttendance';
+import SourceEmployeeAttendance, { ISourceEmployeeAttendanceAttributes } from '../models/mssql/SourceEmployeeRawAttendanceData';
 //import { EmployeeAttendanceRepository } from './EmployeeAttendanceService'; // or wherever your repository is
 import logger from '../utils/logs/logger';
 
