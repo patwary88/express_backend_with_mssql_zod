@@ -12,7 +12,7 @@ export class MSSQLTestController {
       });
 
       
-      console.log(sourceRecords);return;
+      //console.log(sourceRecords);return;
 
       res.json(sourceRecords);
     } catch (error: any) {

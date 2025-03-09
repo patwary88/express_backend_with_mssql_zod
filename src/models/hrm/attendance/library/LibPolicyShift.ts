@@ -1,35 +1,45 @@
 import { DataTypes, Model } from 'sequelize';
-import { BaseModel, baseModelAttributes } from '../../BaseModel';
-import sequelize from '../../../config/db';
+import { BaseModel, baseModelAttributes } from '../../../BaseModel';
+import sequelize from '../../../../config/db';
 
-export interface IEmployeeRawAttendanceDataAttributes {
+export interface ILibPolicyShiftAttributes {
   id?: number;
-  pid: string;
-  emp_code?: number;
-  dtime: Date;
-  ctime: Date;
-  shift_policy_id?: number;
+  shift_name?: string;
+  shift_prefix?: string;
   shift_type?: number;
-  is_next_day?: number;
+  is_shift_crossdate?: number;
   shift_start?: Date;
   shift_end?: Date;
-  overtime_policy_id?: number;
-  punch_type?: number;
-  is_manual?: number;
-  ref_id?: number;
-  company_id?: number;
-  location_id?: number;
   grace_minutes?: number;
   exit_buffer_minutes?: number;
   entry_restriction_start?: number;
-  lunch_break_min?: number;
-  dinner_break_min?: number;
-  tiffin_break_min?: number;
-  ip_address: string;
-  machine_name: string;
+  early_out_start?: number;
+  tiffin_start?: Date;
+  tiffin_end?: Date;
+  is_tiffin_crossdate?: number;
+  dinner_start?: Date;
+  dinner_end?: Date;
+  is_dinner_crossdate?: number;
+  lunch_start?: Date;
+  lunch_end?: Date;
+  is_lunch_crossdate?: number;
+  intime_buffer ?:number;
+  is_access_control ?:number;
+  shift_closing?: Date;
+  is_shift_closing_crossdate?:number;
+  is_allow_ot_before_shift_start?:number;
+  is_deduct_tiffin_time?:number;
+  is_deduct_dinner_time?:number;
+  is_entry_restriction_treat_absent?: number;
+  overtime_policy_id?: number;
+  hd_start_min?: number;
+  hd_end_min?: number;
+  company_id?: number;
+  is_night_allowance_applicable?: number;
+
 }
 
-class EmployeeRawAttendanceData extends BaseModel<IEmployeeRawAttendanceDataAttributes> implements IEmployeeRawAttendanceDataAttributes {
+class LibPolicyShift extends BaseModel<ILibPolicyShiftAttributes> implements ILibPolicyShiftAttributes {
   public id!: number;
   public pid!: string;
   public emp_code!: number;
@@ -56,7 +66,7 @@ class EmployeeRawAttendanceData extends BaseModel<IEmployeeRawAttendanceDataAttr
   public machine_name!: string;
 }
 
-EmployeeRawAttendanceData.init(
+LibPolicyShift.init(
   {
     id: { type: DataTypes.INTEGER, autoIncrement: true, primaryKey: true },
     pid: { type: DataTypes.STRING(20), allowNull: true },
@@ -86,12 +96,12 @@ EmployeeRawAttendanceData.init(
   },
   {
     sequelize,
-    modelName: 'hrm_raw_data_attnd_backup', // Logical model name
-    tableName: 'hrm_raw_data_attnd_backup',  // Explicit table name in DB
+    modelName: 'lib_policy_shift', // Logical model name
+    tableName: 'lib_policy_shift',  // Explicit table name in DB
     freezeTableName: true,                   // Prevent pluralization
     timestamps: false,
   }
   
 );
 
-export default EmployeeRawAttendanceData;
+export default LibPolicyShift;

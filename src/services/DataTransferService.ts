@@ -1,42 +1,48 @@
-import SourceEmployeeAttendance, { ISourceEmployeeAttendanceAttributes } from '../models/mssql/SourceEmployeeRawAttendanceData';
-//import { EmployeeAttendanceRepository } from './EmployeeAttendanceService'; // or wherever your repository is
+import SourceEmployeeAttendance, { ISourceEmployeeRawAttendanceDataAttributes } from '../models/mssql/SourceEmployeeRawAttendanceData';
+import EmployeeAttendance, { IEmployeeRawAttendanceDataAttributes } from '../models/hrm/attendance/EmployeeRawAttendanceData'; // This is your target model in MySQL/Oracle
+import sequelize from '../config/db'; // Sequelize instance for target database
 import logger from '../utils/logs/logger';
 
 export class DataTransferService {
-  // private attendanceRepository: EmployeeAttendanceRepository;
+  // Transformation function: convert source record to target record structure.
+  private transformRecord(record: ISourceEmployeeRawAttendanceDataAttributes): ISourceEmployeeRawAttendanceDataAttributes {
+    // Apply your business logic and mapping here.
+    // For example, suppose:
+    // - Source field 'IndexKey' maps to target 'employeeId'
+    // - 'TransactionTime' maps to target 'attendanceDate'
+    // - 'UserID' (from MSSQL) might be transformed or used in a business rule to determine status.
+    return {
+      pid: record.UserID,  // or another mapping if needed
+      attendanceDate: record.TransactionTime,
+      status: record.UserID ? "present" : "absent",  // example business logic: if UserID exists, mark as "present"
+    };
+  }
 
-  // constructor() {
-  //   this.attendanceRepository = new EmployeeAttendanceRepository();
-  // }
-
-  // This method extracts data from MSSQL and loads it into your primary database
+  // Main ETL method for bulk data transfer
   async transferAttendanceData(): Promise<void> {
     try {
-      // Extract data from the MSSQL source
-      //const sourceRecords: ISourceEmployeeAttendanceAttributes[] = await SourceEmployeeAttendance.findAll();
-      const sourceRecords: ISourceEmployeeAttendanceAttributes[] = await SourceEmployeeAttendance.findAll({
-        order: [['id', 'DESC']], // orders records with the latest (highest id) first
-        limit: 1000,
+      // Step 1: Extract source records from MSSQL
+      const sourceRecords: ISourceEmployeeRawAttendanceDataAttributes[] = await SourceEmployeeAttendance.findAll({
+        order: [['IndexKey', 'DESC']],
+        limit: 100, // process in batches if needed
       });
 
-      console.log("Fetched MSSQL Data:", JSON.stringify(sourceRecords, null, 2)); return;
-
-
-      for (const record of sourceRecords) {
-        // Optionally transform the record to match your main database schema.
-        // For instance, rename keys, format dates, etc.
-        const attendanceData = {
-          employeeId: record.IndexKey,
-          attendanceDate: record.UserID,
-          status: record.TransactionTime,
-        };
-
-        // Insert the data into your primary database using your repository method.
-        // Your repository is already configured for MySQL/Oracle.
-        //await this.attendanceRepository.create(attendanceData);
+      if (!sourceRecords.length) {
+        logger.info("No source records found.");
+        return;
       }
 
-      logger.info(`Data transfer complete. Transferred ${sourceRecords.length} records.`);
+      // Step 2: Transform the records
+      const transformedRecords: IEmployeeRawAttendanceDataAttributes[] = sourceRecords.map(record => {
+        return this.transformRecord(record);
+      });
+
+      // Step 3: Bulk insert the transformed records into the target database using a transaction
+      await sequelize.transaction(async (transaction) => {
+        await EmployeeAttendance.bulkCreate(transformedRecords, { transaction });
+      });
+
+      logger.info(`Data transfer complete. Transferred ${transformedRecords.length} records.`);
     } catch (error: any) {
       logger.error(`Error transferring attendance data: ${error.message}`, { stack: error.stack });
       throw error;
