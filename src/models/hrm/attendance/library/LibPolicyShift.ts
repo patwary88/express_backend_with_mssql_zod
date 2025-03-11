@@ -6,10 +6,10 @@ export interface ILibPolicyShiftAttributes {
   id?: number;
   shift_name?: string;
   shift_prefix?: string;
-  shift_type?: number;
-  is_shift_crossdate?: number;
   shift_start?: Date;
   shift_end?: Date;
+  shift_type?: number;
+  is_shift_crossdate?: number;
   grace_minutes?: number;
   exit_buffer_minutes?: number;
   entry_restriction_start?: number;
@@ -36,62 +36,84 @@ export interface ILibPolicyShiftAttributes {
   hd_end_min?: number;
   company_id?: number;
   is_night_allowance_applicable?: number;
+  is_buyer_mode?: number;
 
 }
 
 class LibPolicyShift extends BaseModel<ILibPolicyShiftAttributes> implements ILibPolicyShiftAttributes {
   public id!: number;
-  public pid!: string;
-  public emp_code!: number;
-  public dtime!: Date;
-  public ctime!: Date;
-  public shift_policy_id!: number;
-  public shift_type!: number;
-  public is_next_day!: number;
+  public shift_name!: string;
+  public shift_prefix!: string;
   public shift_start!: Date;
   public shift_end!: Date;
-  public overtime_policy_id!: number;
-  public punch_type!: number;
-  public is_manual!: number;
-  public ref_id!: number;
-  public company_id!: number;
-  public location_id!: number;
+  public shift_type!: number;
+  public is_shift_crossdate!:number;
   public grace_minutes!: number;
   public exit_buffer_minutes!: number;
   public entry_restriction_start!: number;
-  public lunch_break_min!: number;
-  public dinner_break_min!: number;
-  public tiffin_break_min!: number;
-  public ip_address!: string;
-  public machine_name!: string;
+  public early_out_start!: number;
+  public tiffin_start!: Date;
+  public tiffin_end!: Date;
+  public is_tiffin_crossdate!: number;
+  public dinner_start!: Date;
+  public dinner_end!: Date;
+  public is_dinner_crossdate!: number;
+  public lunch_start!: Date;
+  public lunch_end!: Date;
+  public is_lunch_crossdate!: number;
+  public intime_buffer!: number;
+  public is_access_control!: number;
+  public shift_closing!: Date;
+  public is_shift_closing_crossdate!: number;
+  public is_allow_ot_before_shift_start!: number;
+  public is_deduct_tiffin_time!: number;
+  public is_deduct_dinner_time!: number;
+  public is_entry_restriction_treat_absent!: number;
+  public overtime_policy_id!: number;
+  public hd_start_min!: number;
+  public hd_end_min!: number;
+  public company_id!: number;
+  public is_night_allowance_applicable!: number;
+  public is_buyer_mode!: number;
+  
 }
 
 LibPolicyShift.init(
   {
     id: { type: DataTypes.INTEGER, autoIncrement: true, primaryKey: true },
-    pid: { type: DataTypes.STRING(20), allowNull: true },
-    emp_code: { type: DataTypes.INTEGER, allowNull: true },
-    dtime: { type: DataTypes.DATE, allowNull: false },
-    ctime: { type: DataTypes.DATE, allowNull: false },
-    shift_policy_id: { type: DataTypes.INTEGER, allowNull: true },
+    shift_name: { type: DataTypes.STRING(64), allowNull: false },
+    shift_prefix: { type: DataTypes.STRING(20), allowNull: true },
     shift_type: { type: DataTypes.BOOLEAN, allowNull: false, defaultValue: 0 },
-    is_next_day: { type: DataTypes.BOOLEAN, allowNull: false, defaultValue: 0 },
-    shift_start: { type: DataTypes.DATE, allowNull: true },
-    shift_end: { type: DataTypes.DATE, allowNull: true },
-    overtime_policy_id: { type: DataTypes.INTEGER, allowNull: true },
-    punch_type: { type: DataTypes.BOOLEAN, allowNull: false, defaultValue: 0 },
-    is_manual: { type: DataTypes.BOOLEAN, allowNull: false, defaultValue: 0 },
-    ref_id: { type: DataTypes.INTEGER, allowNull: false, defaultValue: 0 },
-    company_id: { type: DataTypes.INTEGER, allowNull: false, defaultValue: 0 },
-    location_id: { type: DataTypes.INTEGER, allowNull: false, defaultValue: 0 },
-    grace_minutes: { type: DataTypes.INTEGER, allowNull: false, defaultValue: 0 },
-    exit_buffer_minutes: { type: DataTypes.INTEGER, allowNull: false, defaultValue: 0 },
-    entry_restriction_start: { type: DataTypes.INTEGER, allowNull: false, defaultValue: 0 },
-    lunch_break_min: { type: DataTypes.INTEGER, allowNull: false, defaultValue: 0 },
-    dinner_break_min: { type: DataTypes.INTEGER, allowNull: false, defaultValue: 0 },
-    tiffin_break_min: { type: DataTypes.INTEGER, allowNull: false, defaultValue: 0 },
-    ip_address: { type: DataTypes.STRING(50), allowNull: true },
-    machine_name: { type: DataTypes.STRING(50), allowNull: true },
+    is_shift_crossdate: { type: DataTypes.BOOLEAN, allowNull: false, defaultValue: 0 },
+    shift_start: { type: DataTypes.DATE, allowNull: false },
+    shift_end: { type: DataTypes.DATE, allowNull: false },
+    grace_minutes: { type: DataTypes.SMALLINT, allowNull: false,defaultValue: 0 },
+    exit_buffer_minutes: { type: DataTypes.SMALLINT, allowNull: false,defaultValue: 0 },
+    entry_restriction_start: { type: DataTypes.SMALLINT, allowNull: false,defaultValue: 0 },
+    early_out_start: { type: DataTypes.SMALLINT, allowNull: false,defaultValue: 0 },
+    tiffin_start: { type: DataTypes.DATE, allowNull: true },
+    tiffin_end: { type: DataTypes.DATE, allowNull: true },
+    is_tiffin_crossdate: { type: DataTypes.BOOLEAN, allowNull: false, defaultValue: 0 },
+    dinner_start: { type: DataTypes.DATE, allowNull: true },
+    dinner_end: { type: DataTypes.DATE, allowNull: true },
+    is_dinner_crossdate: { type: DataTypes.BOOLEAN, allowNull: false, defaultValue: 0 },
+    lunch_start: { type: DataTypes.DATE, allowNull: true },
+    lunch_end: { type: DataTypes.DATE, allowNull: true },
+    is_lunch_crossdate: { type: DataTypes.BOOLEAN, allowNull: false, defaultValue: 0 },
+    intime_buffer: { type: DataTypes.SMALLINT, allowNull: false,defaultValue: 0 },
+    is_access_control: { type: DataTypes.BOOLEAN, allowNull: false, defaultValue: 0 },
+    shift_closing: { type: DataTypes.DATE, allowNull: true },
+    is_shift_closing_crossdate: { type: DataTypes.BOOLEAN, allowNull: false, defaultValue: 0 },
+    is_allow_ot_before_shift_start: { type: DataTypes.BOOLEAN, allowNull: false, defaultValue: 0 },
+    is_deduct_tiffin_time: { type: DataTypes.BOOLEAN, allowNull: false, defaultValue: 0 },
+    is_deduct_dinner_time: { type: DataTypes.BOOLEAN, allowNull: false, defaultValue: 0 },
+    is_entry_restriction_treat_absent: { type: DataTypes.BOOLEAN, allowNull: false, defaultValue: 0 },
+    overtime_policy_id: { type: DataTypes.TINYINT, allowNull: false,defaultValue: 0 },
+    hd_start_min: { type: DataTypes.SMALLINT, allowNull: false,defaultValue: 0 },
+    hd_end_min: { type: DataTypes.SMALLINT, allowNull: false,defaultValue: 0 },
+    company_id: { type: DataTypes.TINYINT, allowNull: false,defaultValue: 0 },
+    is_night_allowance_applicable: { type: DataTypes.BOOLEAN, allowNull: false, defaultValue: 0 },
+    is_buyer_mode: { type: DataTypes.BOOLEAN, allowNull: false, defaultValue: 0 },
     ...baseModelAttributes,
   },
   {
@@ -99,7 +121,7 @@ LibPolicyShift.init(
     modelName: 'lib_policy_shift', // Logical model name
     tableName: 'lib_policy_shift',  // Explicit table name in DB
     freezeTableName: true,                   // Prevent pluralization
-    timestamps: false,
+    timestamps: true,
   }
   
 );

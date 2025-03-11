@@ -3,6 +3,7 @@ import dotenv from 'dotenv';
 import cookieParser from 'cookie-parser';
 import userRoutes from './routes/user.routes';
 import employeeRoutes from './routes/employee.routes';
+import employeeAttendanceRoutes from './routes/employeeAttendance.routes';
 import { errorHandler } from './middleware/errorHandler';
 import { securityMiddleware } from './middleware/security';
 import mssqlTestRoutes from './routes/mssqlTest.routes';
@@ -14,7 +15,7 @@ app.use(express.json());
 app.use(cookieParser());
 
 // Apply security middleware
-// securityMiddleware(app);
+securityMiddleware(app);
 
 // // User routes
 // app.use('/api/users', userRoutes);
@@ -25,8 +26,9 @@ app.use(cookieParser());
 
 
 // Apply security middleware only to specific routes
-app.use('/api/users', securityMiddleware, userRoutes);
-app.use('/api/employee', securityMiddleware, employeeRoutes);
+app.use('/api/users', userRoutes);
+app.use('/api/employee', employeeRoutes);
+app.use('/api/attendance', employeeAttendanceRoutes);
 
 // Exclude security middleware for /api/test
 app.use('/api/test', mssqlTestRoutes);
