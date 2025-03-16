@@ -1,12 +1,13 @@
 npm init -y
 
 # Production dependencies
-npm install express dotenv jsonwebtoken bcryptjs helmet cors xss-clean express-rate-limit sequelize mysql2 oracledb cookie-parser express-validator mssql
+npm install express dotenv jsonwebtoken bcryptjs helmet cors xss-clean express-rate-limit sequelize mysql2 oracledb cookie-parser express-validator mssql joi
 
 # Development dependencies
-npm install --save-dev typescript ts-node nodemon @types/express @types/node @types/jsonwebtoken @types/bcryptjs @types/helmet @types/cors @types/express-rate-limit @types/cookie-parser
+npm install --save-dev typescript ts-node nodemon @types/express @types/node @types/jsonwebtoken @types/bcryptjs @types/helmet @types/cors @types/express-rate-limit @types/cookie-parser @types/joi
 
-npm install winston winston-daily-rotate-file
+npm install sequelize tedious
+npm install --save-dev typescript ts-node @types/node
 
 
 Using ts-node with nodemon (Development Mode) :

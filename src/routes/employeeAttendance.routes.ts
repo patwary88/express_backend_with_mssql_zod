@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import { authenticateJWT } from '../middleware/auth';
-import { libPoichShiftController } from '../controllers/hrm/attendance/libPoichShiftController';
+import { libPoichShiftController } from '../controllers/hrm/attendance/library/libPoichShiftController';
 import { body } from 'express-validator';
 
 const router = Router();
@@ -25,22 +25,22 @@ router.post(
 );
 
 // POST /api/users/login
-router.get(
-  '/emp-basic/:emp_code',
-  [
-    body('emp_code').isString().notEmpty().trim().escape(),
-  ],
-  LibPoichShiftController.funcGetEmployeeByEmpCode
-);
+// router.get(
+//   '/emp-basic/:emp_code',
+//   [
+//     body('emp_code').isString().notEmpty().trim().escape(),
+//   ],
+//   LibPoichShiftController.funcGetEmployeeByEmpCode
+// );
 
-//// Retrieve all employees (GET)
-router.get('/emp-basic', LibPoichShiftController.funcGetAllEmployee);
+// //// Retrieve all employees (GET)
+// router.get('/emp-basic', LibPoichShiftController.funcGetAllEmployee);
 
-// Update an employee (PUT)
-router.put('/emp-basic/:emp_code', LibPoichShiftController.funcUpdateEmployee);
+// // Update an employee (PUT)
+// router.put('/emp-basic/:emp_code', LibPoichShiftController.funcUpdateEmployee);
 
-// Delete an employee (DELETE)
-router.delete('/emp-basic/:emp_code', LibPoichShiftController.funcdeleteEmployee);
+// // Delete an employee (DELETE)
+// router.delete('/emp-basic/:emp_code', LibPoichShiftController.funcdeleteEmployee);
 
 
 export default router;

@@ -1,9 +1,11 @@
 import logger from '../../../utils/logs/logger';
+import { employeeSchema } from '../../../utils/validataor/employee/employeeValidator';
 import { EmployeeBasicRepository } from '../../../repositories/hrm/employee/EmployeeBasicRepository';
 // import * as jwt from 'jsonwebtoken';
 // import { SignOptions } from 'jsonwebtoken';
 // import bcrypt from 'bcryptjs';
 import { IEmployeeBasicAttributes } from '../../../models/hrm/employee/employeeBasic';
+
 export class EmployeeBasicService {
 
     public empBasicRepository: EmployeeBasicRepository;
@@ -17,6 +19,10 @@ export class EmployeeBasicService {
 
         try {
            // const hashedPassword = bcrypt.hashSync(password, 10);
+
+            // Validate input with Joi (including async uniqueness check)
+           await employeeSchema.validateAsync(data, { abortEarly: false });
+
             const employeeResponse = await this.empBasicRepository.create(data, { userId: currentUserId });
             return employeeResponse;
           } catch (error: any) {
