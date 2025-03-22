@@ -1,5 +1,5 @@
 import logger from '../../../utils/logs/logger';
-import { employeeSchema } from '../../../utils/validataor/employee/employeeValidator';
+import { employeeSchema } from '../../../utils/validataor/employee/employeeBasicValidator';
 import { EmployeeBasicRepository } from '../../../repositories/hrm/employee/EmployeeBasicRepository';
 // import * as jwt from 'jsonwebtoken';
 // import { SignOptions } from 'jsonwebtoken';
