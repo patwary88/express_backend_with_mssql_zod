@@ -67,7 +67,7 @@ is_deleted?: number;
 is_locked?: number;
 remark?: string;
 is_posted_account?: number;
-advance_applicable?: number;
+is_advance_applicable?: number;
 confirmation_type?: number;
 functional_superior?: number;
 admin_superior?: number;
@@ -181,7 +181,7 @@ public is_deleted!: number;
 public is_locked!: number;
 public remark!: string;
 public is_posted_account!: number;
-public advance_applicable!: number;
+public is_advance_applicable!: number;
 public confirmation_type!: number;
 public functional_superior!: number;
 public admin_superior!: number;
@@ -209,6 +209,7 @@ public absent_deduction_policy!: number;
 public late_deduction_policy!: number;
 public bonus_policy!: number;
 public tax_policy!: number;
+public shift_policy!: number;
 public tiffin_policy!: number;
 public allowance_policy!: number;
 public early_deduction_policy!: number;
@@ -236,9 +237,115 @@ public updated_by!: number;
   EmployeeBasic.init(
     {
       id: { type: DataTypes.INTEGER, autoIncrement: true, primaryKey: true },
-      emp_code: { type: DataTypes.INTEGER, allowNull: true },
-      first_name: { type: DataTypes.STRING, allowNull: false },
-      last_name: { type: DataTypes.STRING, allowNull: true },
+      emp_code: { type: DataTypes.MEDIUMINT.UNSIGNED, allowNull: true },
+      id_card_no: { type: DataTypes.STRING(20), allowNull: false },
+      punch_card_no: { type: DataTypes.STRING(20), allowNull: false , defaultValue: '0000000000'},
+	  dob: { type: DataTypes.DATE, allowNull: false },
+	  actual_dob: { type: DataTypes.DATE, allowNull: true },
+	  first_name: { type: DataTypes.STRING(100), allowNull: false },
+	  last_name: { type: DataTypes.STRING(100), allowNull: true },
+	  nick_name: { type: DataTypes.STRING(100), allowNull: true },
+	  full_name_local: { type: DataTypes.STRING(100), allowNull: true },
+	  father_name: { type: DataTypes.STRING(100), allowNull: true },
+	  father_name_local: { type: DataTypes.STRING(100), allowNull: true },
+	  mother_name: { type: DataTypes.STRING(100), allowNull: true },
+	  mother_name_local: { type: DataTypes.STRING(100), allowNull: true },
+	  spouse_name: { type: DataTypes.STRING(100), allowNull: true },
+	  spouse_name_local: { type: DataTypes.STRING(100), allowNull: true },
+	  birth_place: { type: DataTypes.STRING(64), allowNull: true },
+	  religion: { type: DataTypes.SMALLINT.UNSIGNED, allowNull: false, defaultValue: 0},
+	  blood_group: { type: DataTypes.TINYINT.UNSIGNED, allowNull: false, defaultValue: 0},
+	  marital_status: { type: DataTypes.TINYINT.UNSIGNED, allowNull: false, defaultValue: 0},
+	  sex: { type: DataTypes.TINYINT.UNSIGNED, allowNull: false, defaultValue: 0},
+	  nationality: { type: DataTypes.SMALLINT.UNSIGNED, allowNull: false, defaultValue: 0},
+	  national_id: { type: DataTypes.STRING(50), allowNull: true },
+	  passport_no: { type: DataTypes.STRING(50), allowNull: true },
+	  joining_date: { type: DataTypes.DATE, allowNull: false },
+	  confirmation_date: { type: DataTypes.DATE, allowNull: true },
+	  service_benifit_from: { type: DataTypes.TINYINT.UNSIGNED, allowNull: false, defaultValue: 0},
+	  salary_grade: { type: DataTypes.STRING(20), allowNull: true },
+	  salary_rule: { type: DataTypes.TINYINT.UNSIGNED, allowNull: false, defaultValue: 0},
+	  starting_salary: { type: DataTypes.MEDIUMINT.UNSIGNED, allowNull: false, defaultValue: 0},
+	  gross_salary: { type: DataTypes.MEDIUMINT.UNSIGNED, allowNull: false, defaultValue: 0},
+	  buyer_gross_salary: { type: DataTypes.MEDIUMINT.UNSIGNED, allowNull: false, defaultValue: 0},
+	  bank_gross: { type: DataTypes.MEDIUMINT.UNSIGNED, allowNull: false, defaultValue: 0},
+	  buyer_bank_gross: { type: DataTypes.MEDIUMINT.UNSIGNED, allowNull: false, defaultValue: 0},
+	  is_suspension: { type: DataTypes.BOOLEAN, allowNull: false, defaultValue: 0 },
+	  is_attendance: { type: DataTypes.BOOLEAN, allowNull: false, defaultValue: 0 },
+	  is_salary: { type: DataTypes.BOOLEAN, allowNull: false, defaultValue: 0 },
+	  category: { type: DataTypes.TINYINT.UNSIGNED, allowNull: false, defaultValue: 0},
+	  company_id: { type: DataTypes.TINYINT.UNSIGNED, allowNull: false, defaultValue: 0},
+	  location_id: { type: DataTypes.TINYINT.UNSIGNED, allowNull: false, defaultValue: 0},
+	  division_id: { type: DataTypes.TINYINT.UNSIGNED, allowNull: false, defaultValue: 0},
+	  department_id: { type: DataTypes.SMALLINT.UNSIGNED, allowNull: false, defaultValue: 0},
+	  section_id: { type: DataTypes.SMALLINT.UNSIGNED, allowNull: false, defaultValue: 0},
+	  subsection_id: { type: DataTypes.SMALLINT.UNSIGNED, allowNull: false, defaultValue: 0},
+	  job_location_id: { type: DataTypes.TINYINT.UNSIGNED, allowNull: false, defaultValue: 0},
+	  unit_id: { type: DataTypes.SMALLINT.UNSIGNED, allowNull: false, defaultValue: 0},
+	  floor_id: { type: DataTypes.SMALLINT.UNSIGNED, allowNull: false, defaultValue: 0},
+	  building_id: { type: DataTypes.SMALLINT.UNSIGNED, allowNull: false, defaultValue: 0},
+	  line_id: { type: DataTypes.SMALLINT.UNSIGNED, allowNull: false, defaultValue: 0},
+	  designation_level: { type: DataTypes.TINYINT.UNSIGNED, allowNull: false, defaultValue: 0},
+	  designation_id: { type: DataTypes.SMALLINT.UNSIGNED, allowNull: false, defaultValue: 0},
+	  skill_rank: { type: DataTypes.STRING(50), allowNull: true },
+	  cash_disbursement: { type: DataTypes.BOOLEAN, allowNull: false, defaultValue: 0 },
+	  contract_start_date: { type: DataTypes.DATE, allowNull: true },
+	  contract_end_date: { type: DataTypes.DATE, allowNull: true },
+	  emp_ref_code: { type: DataTypes.MEDIUMINT.UNSIGNED, allowNull: true },
+	  is_locked: { type: DataTypes.BOOLEAN, allowNull: false, defaultValue: 0 },
+	  remark: { type: DataTypes.STRING(100), allowNull: true },
+	  is_posted_account: { type: DataTypes.BOOLEAN, allowNull: false, defaultValue: 0 },
+	  is_advance_applicable: { type: DataTypes.BOOLEAN, allowNull: false, defaultValue: 0 },
+	  confirmation_type: { type: DataTypes.BOOLEAN, allowNull: false, defaultValue: 0 },
+	  functional_superior: { type: DataTypes.MEDIUMINT.UNSIGNED, allowNull: true , defaultValue: 0},
+	  admin_superior: { type: DataTypes.MEDIUMINT.UNSIGNED, allowNull: true , defaultValue: 0},
+	  leave_app_authority: { type: DataTypes.MEDIUMINT.UNSIGNED, allowNull: true , defaultValue: 0},
+	  target_confirm_date: { type: DataTypes.DATE, allowNull: true },
+	  provisional_tenor: { type: DataTypes.SMALLINT.UNSIGNED, allowNull: true , defaultValue: 0},
+	  is_leave_app_process_use: { type: DataTypes.BOOLEAN, allowNull: false, defaultValue: 0 },
+	  id_card_no_old: { type: DataTypes.STRING(20), allowNull: true },
+	  is_ot_req_applicable: { type: DataTypes.BOOLEAN, allowNull: false, defaultValue: 0 },
+	  types_of_work: { type: DataTypes.STRING(50), allowNull: true },
+	  birth_registration_no: { type: DataTypes.STRING(20), allowNull: true },
+	  ot_entitled: { type: DataTypes.BOOLEAN, allowNull: false, defaultValue: 0 },
+	  staff_ot_entitled: { type: DataTypes.BOOLEAN, allowNull: false, defaultValue: 0 },
+	  holiday_allowance_entitled: { type: DataTypes.BOOLEAN, allowNull: false, defaultValue: 0 },
+	  pf_entitled: { type: DataTypes.BOOLEAN, allowNull: false, defaultValue: 0 },
+	  gi_entitled: { type: DataTypes.BOOLEAN, allowNull: false, defaultValue: 0 },
+	  salary_type_entitled: { type: DataTypes.TINYINT.UNSIGNED, allowNull: false, defaultValue: 0 },
+	  overtime_policy: { type: DataTypes.TINYINT.UNSIGNED, allowNull: false, defaultValue: 0 },
+	  holiday_incentive_policy: { type: DataTypes.TINYINT.UNSIGNED, allowNull: false, defaultValue: 0 },
+	  duty_roster_policy: { type: DataTypes.TINYINT.UNSIGNED, allowNull: false, defaultValue: 0 },
+	  leave_policy: { type: DataTypes.TINYINT.UNSIGNED, allowNull: false, defaultValue: 0 },
+	  maternity_leave_policy: { type: DataTypes.TINYINT.UNSIGNED, allowNull: false, defaultValue: 0 },
+	  attendance_bonus_policy: { type: DataTypes.TINYINT.UNSIGNED, allowNull: false, defaultValue: 0 },
+	  absent_deduction_policy: { type: DataTypes.TINYINT.UNSIGNED, allowNull: false, defaultValue: 0 },
+	  late_deduction_policy: { type: DataTypes.TINYINT.UNSIGNED, allowNull: false, defaultValue: 0 },
+	  bonus_policy: { type: DataTypes.TINYINT.UNSIGNED, allowNull: false, defaultValue: 0 },
+	  tax_policy: { type: DataTypes.TINYINT.UNSIGNED, allowNull: false, defaultValue: 0 },
+	  shift_policy: { type: DataTypes.SMALLINT.UNSIGNED, allowNull: false, defaultValue: 0 },
+	  tiffin_policy: { type: DataTypes.TINYINT.UNSIGNED, allowNull: false, defaultValue: 0 },
+	  allowance_policy: { type: DataTypes.SMALLINT.UNSIGNED, allowNull: false, defaultValue: 0 },
+	  early_deduction_policy: { type: DataTypes.TINYINT.UNSIGNED, allowNull: false, defaultValue: 0 },
+	  hd_deduct_policy: { type: DataTypes.TINYINT.UNSIGNED, allowNull: false, defaultValue: 0 },
+	  production_bonus_policy: { type: DataTypes.TINYINT.UNSIGNED, allowNull: false, defaultValue: 0 },
+	  missing_punch_policy: { type: DataTypes.TINYINT.UNSIGNED, allowNull: false, defaultValue: 0 },
+	  service_benefit_policy: { type: DataTypes.TINYINT.UNSIGNED, allowNull: false, defaultValue: 0 },
+	  tin_no: { type: DataTypes.STRING(20), allowNull: true },
+	  template_id: { type: DataTypes.TINYINT.UNSIGNED, allowNull: false, defaultValue: 0 },
+	  service_book_no: { type: DataTypes.STRING(50), allowNull: true },
+	  height: { type: DataTypes.STRING(30), allowNull: true },
+	  identification_sign: { type: DataTypes.STRING(100), allowNull: true },
+	  candidate_id: { type: DataTypes.MEDIUMINT.UNSIGNED, allowNull: false, defaultValue: 0 },
+	  weekend_id: { type: DataTypes.TINYINT.UNSIGNED, allowNull: false, defaultValue: 0 },
+	  is_external_transfer: { type: DataTypes.BOOLEAN, allowNull: false, defaultValue: 0 },
+	  is_lunch_applicable: { type: DataTypes.BOOLEAN, allowNull: false, defaultValue: 0 },
+	  manpower_type: { type: DataTypes.TINYINT.UNSIGNED, allowNull: false, defaultValue: 0 },
+	  office_id: { type: DataTypes.SMALLINT.UNSIGNED, allowNull: false, defaultValue: 0 },
+	  incre_month: { type: DataTypes.STRING(30), allowNull: true },
+	  //inserted_by: { type: DataTypes.MEDIUMINT.UNSIGNED, allowNull: false, defaultValue: 0 },
+	  //updated_by: { type: DataTypes.MEDIUMINT.UNSIGNED, allowNull: false, defaultValue: 0 },
+
       ...baseModelAttributes,
       
     },
