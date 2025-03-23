@@ -13,7 +13,7 @@ router.post(
   '/emp-basic',
   [
     body('first_name').isString().notEmpty().trim().escape(),
-    body('last_name').isString().trim().escape(),
+    //body('last_name').isString().trim().escape(),
   ],
   EmpBasicController.funcBasicEntry
 );

@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import { validationResult } from 'express-validator';
-import { EmployeeBasicService } from '../../../services/hrm/employee/EmployeeService';
+import { EmployeeBasicService } from '../../../services/hrm/employee/EmployeeBasicService';
 export class employeeBasicController {
 
     public employeeBasicService: EmployeeBasicService;
