@@ -1,4 +1,5 @@
-import { Request, Response } from 'express';
+import logger from '../../../utils/logs/logger';
+import { Request, Response , NextFunction} from 'express';
 import { validationResult } from 'express-validator';
 import { EmployeeBasicService } from '../../../services/hrm/employee/EmployeeBasicService';
 export class employeeBasicController {
@@ -9,27 +10,42 @@ export class employeeBasicController {
         this.employeeBasicService = new EmployeeBasicService();
       }
 
-    funcBasicEntry = async (req: Request, res: Response): Promise<void> => {
-        const errors = validationResult(req);
-        //console.log(errors);return;
-        if (!errors.isEmpty()) {
-            res.status(400).json({ errors: errors.array() });
-            return;
-        }
+    // funcBasicEntry = async (req: Request, res: Response): Promise<void> => {
+    //     const errors = validationResult(req);
+    //     //console.log(errors);return;
+    //     if (!errors.isEmpty()) {
+    //         res.status(400).json({ errors: errors.array() });
+    //         return;
+    //     }
 
-        try{
-          const currentUserId = (req as any).user.id;
-          const employeeData = req.body;
-          //console.log(currentUserId);return;
-          //  const { first_name, last_name } = req.body;
+    //     try{
+    //       const currentUserId = (req as any).user.id;
+    //       const employeeData = req.body;
+    //       //console.log(currentUserId);return;
+    //       //  const { first_name, last_name } = req.body;
             
-            const employee = await this.employeeBasicService.funcBasicEntry(employeeData, currentUserId);
-            res.status(201).json(employee);
+    //         const employee = await this.employeeBasicService.funcBasicEntry(employeeData, currentUserId);
+    //         res.status(201).json(employee);
 
-        }catch (error: any) {
-          res.status(500).json({ message: error.message });
-        }
+    //     }catch (error: any) {
+    //       res.status(500).json({ message: error.message });
+    //     }
+    // }
+    
+      // Note: The function signature includes NextFunction to pass errors if needed.
+  funcBasicEntry = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+    try {
+      // At this point, req.body is validated by validateRequest middleware.
+      const currentUserId = (req as any).user?.id;
+      const employeeData = req.body;
+      const employee = await this.employeeBasicService.funcBasicEntry(employeeData, currentUserId);
+      res.status(201).json({ success: true, data: employee });
+    } catch (error: any) {
+      logger.error(`Error creating employee: ${error.message}`, { stack: error.stack });
+      // Pass error to global error handler (or return proper response)
+      next(error);
     }
+  }
 
     funcGetEmployeeByEmpCode = async (req: Request, res: Response): Promise<void> => {
      

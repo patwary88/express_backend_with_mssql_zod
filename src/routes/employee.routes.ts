@@ -1,6 +1,10 @@
 import { Router } from 'express';
 import { authenticateJWT } from '../middleware/auth';
 import { employeeBasicController } from '../controllers/hrm/employee/employeeBasicController';
+//import { validateEmployee } from '../middleware/hrm/employee/validateEmployee';
+
+import { validateRequest } from '../middleware/hrm/employee/validateEmployee';
+import { employeeSchema } from '../utils/validataor/employee/employeeBasicValidator';
 import { body } from 'express-validator';
 
 const router = Router();
@@ -9,14 +13,17 @@ router.use(authenticateJWT);
 const EmpBasicController = new employeeBasicController();
 
 // POST /api/users/register
-router.post(
-  '/emp-basic',
-  [
-    body('first_name').isString().notEmpty().trim().escape(),
-    //body('last_name').isString().trim().escape(),
-  ],
-  EmpBasicController.funcBasicEntry
-);
+// router.post(
+//   '/emp-basic',
+//   // [
+//   //   body('first_name').isString().notEmpty().trim().escape(),
+//   //   //body('last_name').isString().trim().escape(),
+//   // ],
+  
+//   EmpBasicController.funcBasicEntry
+// );
+router.post('/emp-basic', validateRequest(employeeSchema), EmpBasicController.funcBasicEntry);
+
 
 // POST /api/users/login
 router.get(
