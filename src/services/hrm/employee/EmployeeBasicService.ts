@@ -1,4 +1,5 @@
 import logger from '../../../utils/logs/logger';
+import { BusinessValidationError } from '../../../errors/BusinessValidationError';
 //import { employeeSchema } from '../../../utils/validataor/employee/employeeBasicValidator';
 import { EmployeeBasicRepository } from '../../../repositories/hrm/employee/EmployeeBasicRepository';
 // import * as jwt from 'jsonwebtoken';
@@ -22,9 +23,24 @@ export class EmployeeBasicService {
 
             // Validate input with Joi (including async uniqueness check)
           // await employeeSchema.validateAsync(data, { abortEarly: false });
+          // Initialize an errors array to collect business rule errors.
+          const errors: { field: string; message: string }[] = [];
+
+          // Example business validation: first_name should not equal last_name
+          if (data.first_name.trim() === (data.last_name || "").trim()) {
+            errors.push({ field: "last_name", message: "Last name cannot be the same as first name" });
+          }
+
+
+
+          if (errors.length > 0) {
+            throw new BusinessValidationError(errors);
+          }
 
             const employeeResponse = await this.empBasicRepository.create(data, { userId: currentUserId });
             return employeeResponse;
+
+            
           } catch (error: any) {
             logger.error(`Error creating employee: ${error.message}`, { stack: error.stack });
             throw error; // Optionally rethrow or handle error

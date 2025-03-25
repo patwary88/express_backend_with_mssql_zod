@@ -2,6 +2,7 @@ import logger from '../../../utils/logs/logger';
 import { Request, Response , NextFunction} from 'express';
 import { validationResult } from 'express-validator';
 import { EmployeeBasicService } from '../../../services/hrm/employee/EmployeeBasicService';
+import { BusinessValidationError } from '../../../errors/BusinessValidationError';
 export class employeeBasicController {
 
     public employeeBasicService: EmployeeBasicService;
@@ -41,6 +42,17 @@ export class employeeBasicController {
       const employee = await this.employeeBasicService.funcBasicEntry(employeeData, currentUserId);
       res.status(201).json({ success: true, data: employee });
     } catch (error: any) {
+
+      // Check if it's a business validation error and return a structured error response
+      if (error instanceof BusinessValidationError) {
+        res.status(400).json({
+          success: false,
+          message: "Business validation failed",
+          errors: error.errors,
+        });
+        return; // Exit function without returning a Response object
+      }
+
       logger.error(`Error creating employee: ${error.message}`, { stack: error.stack });
       // Pass error to global error handler (or return proper response)
       next(error);
