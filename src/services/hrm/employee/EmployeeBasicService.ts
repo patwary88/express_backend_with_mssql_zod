@@ -31,8 +31,6 @@ export class EmployeeBasicService {
             errors.push({ field: "last_name", message: "Last name cannot be the same as first name" });
           }
 
-
-
           if (errors.length > 0) {
             throw new BusinessValidationError(errors);
           }
@@ -40,7 +38,7 @@ export class EmployeeBasicService {
             const employeeResponse = await this.empBasicRepository.create(data, { userId: currentUserId });
             return employeeResponse;
 
-            
+
           } catch (error: any) {
             logger.error(`Error creating employee: ${error.message}`, { stack: error.stack });
             throw error; // Optionally rethrow or handle error
@@ -51,11 +49,18 @@ export class EmployeeBasicService {
 
     async funcGetEmployeeByEmpCode(emp_code:number):Promise <any>{
 
+      
       const employeeObj = await this.empBasicRepository.getEmployeeByEmpCode(emp_code);
-
+      const errors: { field: string; message: string }[] = [];
       if (!employeeObj) {
         logger.error(`Employee data not found for emp_code  "${emp_code}".`);
-        return null;
+        
+        errors.push({ field: "emp_code", message: `Employee data not found for emp_code  "${emp_code}".` });
+
+        if (errors.length > 0) {
+          throw new BusinessValidationError(errors);
+        }
+       // return null;
       }
   //console.log(employeeObj);return;
       return employeeObj;

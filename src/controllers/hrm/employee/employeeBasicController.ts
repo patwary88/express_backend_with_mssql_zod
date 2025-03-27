@@ -59,14 +59,8 @@ export class employeeBasicController {
     }
   }
 
-    funcGetEmployeeByEmpCode = async (req: Request, res: Response): Promise<void> => {
+    funcGetEmployeeByEmpCode = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
      
-
-      const errors = validationResult(req);
-      if (!errors.isEmpty()) {
-        res.status(400).json({ errors: errors.array() });
-        return;
-      }
       try {
 
         const { emp_code } = req.body;
@@ -74,7 +68,19 @@ export class employeeBasicController {
         res.status(200).json( {employee} );
 
       }catch (error: any) {
-        res.status(500).json({ message: error.message });
+
+        if (error instanceof BusinessValidationError) {
+          res.status(400).json({
+            success: false,
+            message: "Business validation failed",
+            errors: error.errors,
+          });
+          return; // Exit function without returning a Response object
+        }
+  
+        logger.error(`Error Get employee: ${error.message}`, { stack: error.stack });
+        // Pass error to global error handler (or return proper response)
+        next(error);
       }
       
     }

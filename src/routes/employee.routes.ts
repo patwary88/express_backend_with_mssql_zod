@@ -4,7 +4,7 @@ import { employeeBasicController } from '../controllers/hrm/employee/employeeBas
 //import { validateEmployee } from '../middleware/hrm/employee/validateEmployee';
 
 import { validateRequest } from '../middleware/hrm/employee/validateEmployee';
-import { employeeSchema } from '../utils/validataor/employee/employeeBasicValidator';
+import { employeeBasicEntrySchema ,GetEmployeeBasicEntrySchema } from '../utils/validataor/employee/employeeBasicValidator';
 import { body } from 'express-validator';
 
 const router = Router();
@@ -22,15 +22,16 @@ const EmpBasicController = new employeeBasicController();
   
 //   EmpBasicController.funcBasicEntry
 // );
-router.post('/emp-basic', validateRequest(employeeSchema), EmpBasicController.funcBasicEntry);
+router.post('/emp-basic', validateRequest(employeeBasicEntrySchema), EmpBasicController.funcBasicEntry);
 
 
 // POST /api/users/login
 router.get(
   '/emp-basic/:emp_code',
-  [
-    body('emp_code').isString().notEmpty().trim().escape(),
-  ],
+  // [
+  //   body('emp_code').isString().notEmpty().trim().escape(),
+  // ],
+  validateRequest(GetEmployeeBasicEntrySchema),
   EmpBasicController.funcGetEmployeeByEmpCode
 );
 
