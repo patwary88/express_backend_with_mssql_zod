@@ -1,5 +1,5 @@
 import logger from '../../../utils/logs/logger';
-import { BusinessValidationError } from '../../../errors/BusinessValidationError';
+//import { BusinessValidationError } from '../../../errors/BusinessValidationError';
 //import { employeeSchema } from '../../../utils/validataor/employee/employeeBasicValidator';
 import { EmployeeBasicRepository } from '../../../repositories/hrm/employee/EmployeeBasicRepository';
 // import * as jwt from 'jsonwebtoken';
@@ -27,13 +27,13 @@ export class EmployeeBasicService {
           const errors: { field: string; message: string }[] = [];
 
           // Example business validation: first_name should not equal last_name
-          if (data.first_name.trim() === (data.last_name || "").trim()) {
-            errors.push({ field: "last_name", message: "Last name cannot be the same as first name" });
-          }
+          // if (data.first_name.trim() === (data.last_name || "").trim()) {
+          //   errors.push({ field: "last_name", message: "Last name cannot be the same as first name" });
+          // }
 
-          if (errors.length > 0) {
-            throw new BusinessValidationError(errors);
-          }
+          // if (errors.length > 0) {
+          //   throw new BusinessValidationError(errors);
+          // }
 
             const employeeResponse = await this.empBasicRepository.create(data, { userId: currentUserId });
             return employeeResponse;
@@ -55,11 +55,11 @@ export class EmployeeBasicService {
       if (!employeeObj) {
         logger.error(`Employee data not found for emp_code  "${emp_code}".`);
         
-        errors.push({ field: "emp_code", message: `Employee data not found for emp_code  "${emp_code}".` });
+        // errors.push({ field: "emp_code", message: `Employee data not found for emp_code  "${emp_code}".` });
 
-        if (errors.length > 0) {
-          throw new BusinessValidationError(errors);
-        }
+        // if (errors.length > 0) {
+        //   throw new BusinessValidationError(errors);
+        // }
        // return null;
       }
   //console.log(employeeObj);return;

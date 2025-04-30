@@ -1,15 +1,17 @@
 npm init -y
 
 # Production dependencies
-npm install express dotenv jsonwebtoken bcryptjs helmet cors xss-clean express-rate-limit sequelize mysql2 oracledb cookie-parser express-validator mssql joi
+npm install express dotenv jsonwebtoken bcryptjs helmet cors xss-clean express-rate-limit sequelize mysql2 oracledb cookie-parser express-validator mssql
 
 # Development dependencies
-npm install --save-dev typescript ts-node nodemon @types/express @types/node @types/jsonwebtoken @types/bcryptjs @types/helmet @types/cors @types/express-rate-limit @types/cookie-parser @types/joi
+npm install --save-dev typescript ts-node nodemon @types/express @types/node @types/jsonwebtoken @types/bcryptjs @types/helmet @types/cors @types/express-rate-limit @types/cookie-parser
 
 npm install sequelize tedious
 npm install --save-dev typescript ts-node @types/node
 
-npm install @joi/date
+for validation
+
+npm install zod
 
 
 Using ts-node with nodemon (Development Mode) :
@@ -51,5 +53,13 @@ Error: listen EADDRINUSE: address already in use :::5000
 
 netstat -ano | findstr :5000
 soln : taskkill /PID 12345 /F
+
+restart typescript and cache clear command
+npx tsc --build --clean
+
+
+add ts config path
+
+npm install --save-dev tsconfig-paths
 
 
