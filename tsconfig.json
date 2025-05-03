@@ -16,9 +16,10 @@
         "express"  // Include Express types (optional if installed separately)
       ],
       "baseUrl": "src",
-      // "paths": {
-      //   "@utils/*": ["utils/*"]
-      // }
+      "paths": {
+       "@common/*": ["utils/common/*"], // → for individual files
+       "@common": ["utils/common/index.ts"] //for your common/index.ts
+      }
     },
     "include": ["src/**/*"],
     "exclude": ["node_modules", "**/*.spec.ts"]

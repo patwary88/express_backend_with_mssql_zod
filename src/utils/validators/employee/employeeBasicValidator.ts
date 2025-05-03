@@ -1,14 +1,8 @@
 // src/utils/validators/employee/employeeBasicValidator.ts
 import { z } from 'zod';
 import EmployeeBasic from '../../../models/hrm/employee/employeeBasic';
-import { uniqueFieldValidator } from '../uniqueFieldValidator';
-//import { calculateAge } from '@utils/common';
-
-
-function calculateAge(dob: string) {
-  return new Date(Date.now() - new Date(dob).getTime())
-    .getUTCFullYear() - 1970;
-}
+//import { uniqueFieldValidator } from '../uniqueFieldValidator';
+import { calculateAge ,uniqueFieldValidator} from '@common';
 
 export const employeeSchema = z.object({
   // emp_code: z
