@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Apr 23, 2025 at 10:45 AM
+-- Generation Time: May 06, 2025 at 10:19 AM
 -- Server version: 8.3.0
 -- PHP Version: 7.4.33
 
@@ -143,7 +143,17 @@ CREATE TABLE IF NOT EXISTS `hrm_employees` (
   `createdAt` datetime NOT NULL,
   `updatedAt` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `hrm_employees`
+--
+
+INSERT INTO `hrm_employees` (`id`, `emp_code`, `id_card_no`, `punch_card_no`, `dob`, `actual_dob`, `first_name`, `last_name`, `nick_name`, `full_name_local`, `father_name`, `father_name_local`, `mother_name`, `mother_name_local`, `spouse_name`, `spouse_name_local`, `birth_place`, `religion`, `blood_group`, `marital_status`, `sex`, `nationality`, `national_id`, `passport_no`, `joining_date`, `confirmation_date`, `service_benifit_from`, `salary_grade`, `salary_rule`, `starting_salary`, `gross_salary`, `buyer_gross_salary`, `bank_gross`, `buyer_bank_gross`, `is_suspension`, `is_attendance`, `is_salary`, `category`, `company_id`, `location_id`, `division_id`, `department_id`, `section_id`, `subsection_id`, `job_location_id`, `unit_id`, `floor_id`, `building_id`, `line_id`, `designation_level`, `designation_id`, `skill_rank`, `cash_disbursement`, `contract_start_date`, `contract_end_date`, `emp_ref_code`, `is_locked`, `remark`, `is_posted_account`, `is_advance_applicable`, `confirmation_type`, `functional_superior`, `admin_superior`, `leave_app_authority`, `target_confirm_date`, `provisional_tenor`, `is_leave_app_process_use`, `id_card_no_old`, `is_ot_req_applicable`, `types_of_work`, `birth_registration_no`, `ot_entitled`, `staff_ot_entitled`, `holiday_allowance_entitled`, `pf_entitled`, `gi_entitled`, `salary_type_entitled`, `overtime_policy`, `holiday_incentive_policy`, `duty_roster_policy`, `leave_policy`, `maternity_leave_policy`, `attendance_bonus_policy`, `absent_deduction_policy`, `late_deduction_policy`, `bonus_policy`, `tax_policy`, `shift_policy`, `tiffin_policy`, `allowance_policy`, `early_deduction_policy`, `hd_deduct_policy`, `production_bonus_policy`, `missing_punch_policy`, `service_benefit_policy`, `tin_no`, `template_id`, `service_book_no`, `height`, `identification_sign`, `candidate_id`, `weekend_id`, `is_external_transfer`, `is_lunch_applicable`, `manpower_type`, `office_id`, `incre_month`, `inserted_by`, `updated_by`, `status_active`, `is_deleted`, `createdAt`, `updatedAt`) VALUES
+(1, 1, '123456', '123456', '2000-01-01 00:00:00', '0000-00-00 00:00:00', 'Mainuddin', 'Patwary', '', '', '', '', '', '', '', '', '', 0, 0, 0, 0, 0, '123456', '', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 0, '', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '', 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00', 0, 0, '', 0, 0, 0, 0, 0, 0, '0000-00-00 00:00:00', 0, 0, '', 0, '', '123456', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '', 0, '', '', '', 0, 0, 0, 0, 0, 0, NULL, 5, NULL, 0, 0, '2025-04-27 06:46:26', '2025-04-27 06:46:26'),
+(2, 2, '123456', '123456', '2000-01-01 00:00:00', '0000-00-00 00:00:00', 'Mainuddin', 'Patwary', '', '', '', '', '', '', '', '', '', 0, 0, 0, 0, 0, '123456', '', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 0, '', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '', 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00', 0, 0, '', 0, 0, 0, 0, 0, 0, '0000-00-00 00:00:00', 0, 0, '', 0, '', '123456', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '', 0, '', '', '', 0, 0, 0, 0, 0, 0, NULL, 1, NULL, 0, 0, '2025-04-27 11:31:24', '2025-04-27 11:31:24'),
+(3, 3, '123456', '123456', '2000-01-01 00:00:00', '0000-00-00 00:00:00', 'Mainuddin', 'Patwary', '', '', '', '', '', '', '', '', '', 0, 0, 0, 0, 0, '123456', '', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 0, '', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '', 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00', 0, 0, '', 0, 0, 0, 0, 0, 0, '0000-00-00 00:00:00', 0, 0, '', 0, '', '123456', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '', 0, '', '', '', 0, 0, 0, 0, 0, 0, NULL, 1, NULL, 0, 0, '2025-04-28 09:24:08', '2025-04-28 09:24:08'),
+(4, 4, '1234566', '1234566', '2000-01-01 00:00:00', '0000-00-00 00:00:00', 'Mainuddin', 'Patwary', '', '', '', '', '', '', '', '', '', 0, 0, 0, 0, 0, '123456', '', '2020-01-01 00:00:00', '0000-00-00 00:00:00', 0, '', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '', 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00', 0, 0, '', 0, 0, 0, 0, 0, 0, '0000-00-00 00:00:00', 0, 0, '', 0, '', '123456', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '', 0, '', '', '', 0, 0, 0, 0, 0, 0, NULL, 1, NULL, 0, 0, '2025-04-30 10:18:16', '2025-04-30 10:18:16');
 
 -- --------------------------------------------------------
 
@@ -247,6 +257,47 @@ INSERT INTO `lib_policy_shift` (`id`, `shift_name`, `shift_prefix`, `shift_type`
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `table_wise_field_history`
+--
+
+DROP TABLE IF EXISTS `table_wise_field_history`;
+CREATE TABLE IF NOT EXISTS `table_wise_field_history` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `menu_id` int NOT NULL DEFAULT '0',
+  `table_name` varchar(164) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `table_field_name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `form_field_name` varchar(128) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `form_field_input_type` varchar(64) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `is_multi_select` tinyint(1) NOT NULL DEFAULT '0',
+  `form_input_field_function_name` varchar(164) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `form_input_event_name` varchar(164) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `is_input_validate` tinyint(1) NOT NULL DEFAULT '0',
+  `is_db_unique_check` tinyint(1) NOT NULL DEFAULT '0',
+  `status` tinyint(1) NOT NULL DEFAULT '1',
+  `sequence` int NOT NULL DEFAULT '1',
+  `status_active` tinyint(1) NOT NULL DEFAULT '1',
+  `is_deleted` tinyint(1) NOT NULL DEFAULT '0',
+  `insert_by` int NOT NULL DEFAULT '1',
+  `insert_date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `update_by` int NOT NULL DEFAULT '1',
+  `update_date` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `table_wise_field_history`
+--
+
+INSERT INTO `table_wise_field_history` (`id`, `menu_id`, `table_name`, `table_field_name`, `form_field_name`, `form_field_input_type`, `is_multi_select`, `form_input_field_function_name`, `form_input_event_name`, `is_input_validate`, `is_db_unique_check`, `status`, `sequence`, `status_active`, `is_deleted`, `insert_by`, `insert_date`, `update_by`, `update_date`) VALUES
+(1, 1, 'hrm_employees', 'first_name', 'First Name', 'text', 0, NULL, NULL, 1, 0, 1, 1, 1, 0, 1, '2025-05-06 15:47:21', 1, NULL),
+(2, 1, 'hrm_employees', 'last_name', 'Last Name', 'text', 0, NULL, NULL, 0, 0, 1, 2, 1, 0, 1, '2025-05-06 15:47:21', 1, NULL),
+(3, 1, 'hrm_employees', 'id_card_no', 'ID Card', 'text', 0, 'func_emp_code_check', 'onDoubleClick', 1, 1, 1, 3, 1, 0, 1, '2025-05-06 15:50:30', 1, NULL),
+(4, 1, 'hrm_employees', 'company_id', 'Company', 'select', 1, 'func_onchange_location', 'onChange', 1, 0, 1, 4, 1, 0, 1, '2025-05-06 16:03:18', 1, NULL),
+(5, 1, 'hrm_employees', 'location_id', 'Location', 'select', 0, NULL, NULL, 0, 0, 1, 1, 1, 0, 1, '2025-05-06 16:03:18', 1, NULL);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `users`
 --
 
@@ -285,49 +336,15 @@ CREATE TABLE IF NOT EXISTS `users` (
   UNIQUE KEY `username_25` (`username`),
   UNIQUE KEY `username_26` (`username`),
   UNIQUE KEY `username_27` (`username`),
-  UNIQUE KEY `username_28` (`username`),
-  UNIQUE KEY `username_29` (`username`),
-  UNIQUE KEY `username_30` (`username`),
-  UNIQUE KEY `username_31` (`username`),
-  UNIQUE KEY `username_32` (`username`),
-  UNIQUE KEY `username_33` (`username`),
-  UNIQUE KEY `username_34` (`username`),
-  UNIQUE KEY `username_35` (`username`),
-  UNIQUE KEY `username_36` (`username`),
-  UNIQUE KEY `username_37` (`username`),
-  UNIQUE KEY `username_38` (`username`),
-  UNIQUE KEY `username_39` (`username`),
-  UNIQUE KEY `username_40` (`username`),
-  UNIQUE KEY `username_41` (`username`),
-  UNIQUE KEY `username_42` (`username`),
-  UNIQUE KEY `username_43` (`username`),
-  UNIQUE KEY `username_44` (`username`),
-  UNIQUE KEY `username_45` (`username`),
-  UNIQUE KEY `username_46` (`username`),
-  UNIQUE KEY `username_47` (`username`),
-  UNIQUE KEY `username_48` (`username`),
-  UNIQUE KEY `username_49` (`username`),
-  UNIQUE KEY `username_50` (`username`),
-  UNIQUE KEY `username_51` (`username`),
-  UNIQUE KEY `username_52` (`username`),
-  UNIQUE KEY `username_53` (`username`),
-  UNIQUE KEY `username_54` (`username`),
-  UNIQUE KEY `username_55` (`username`),
-  UNIQUE KEY `username_56` (`username`),
-  UNIQUE KEY `username_57` (`username`),
-  UNIQUE KEY `username_58` (`username`),
-  UNIQUE KEY `username_59` (`username`),
-  UNIQUE KEY `username_60` (`username`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  UNIQUE KEY `username_28` (`username`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `users`
 --
 
 INSERT INTO `users` (`id`, `username`, `password`, `createdAt`, `updatedAt`) VALUES
-(1, 'hello@example.com', '$2a$10$ryZuQ5d3WkzrHjMP7Bh3Au5ihnzrhSKELfaR.iuZvmGlKwsiryWpK', '2025-02-10 11:44:23', '2025-02-10 11:44:23'),
-(5, 'hello2@example.com', '$2a$10$Ln/Kw6aWZFlKapu3rC8uTek4n0YEq.DviToWjF1mY7nfzcrpRsHVO', '2025-02-11 04:22:26', '2025-02-11 04:22:26'),
-(6, 'hello3@example.com', '$2a$10$USFxr7bRG8361S4080S3BOFH.h0UbaijTA8aXEw0c0C1Ju1ceWngy', '2025-02-11 04:24:34', '2025-02-11 04:24:34');
+(1, 'hello@example.com', '$2a$10$SzWwRxn3FW1GSv5ybLTFn.r538QqRqarBuCpTXm3pckVFpY0dwWWi', '2025-04-27 11:30:33', '2025-04-27 11:30:33');
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
